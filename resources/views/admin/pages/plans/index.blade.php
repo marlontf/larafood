@@ -3,7 +3,7 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-success">ADD</a></h1>
+    <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h1>
 
 @stop
 
@@ -19,7 +19,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Preço</th>
-                        <th width="50">Ações</th>
+                        <th width="100">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,10 +29,15 @@
                                 {{ $plan->name }}
                             </td>
                             <td>
-                                {{ $plan->price }}
+                                R$ {{number_format($plan->price, 2, ',','.')}}
                             </td>
                             <td>
-                                <a href="" class="btn btn-warning">Ver</a>
+                                <a href="{{route('plans.show', $plan->url)}}" class="btn btn-sm btn-warning" aria-label="Ver"><i class="far fa-eye"></i></a>
+                                <form action="{{route('plans.destroy', $plan->url)}}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" aria-label="Deletar"><i class="fas fa-trash-alt"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
