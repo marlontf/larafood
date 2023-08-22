@@ -16,13 +16,13 @@ class PlanController extends Controller
         $this->repository = $plan;
     }
 
-    public function index(){
+    public function index(Request $request){
 
-        $plans = $this->repository->orderby('id','desc')->paginate();
+        $filters = $request->except('_token');
 
-        return view('admin.pages.plans.index',[
-            'plans' => $plans,
-        ]);
+        $plans = $this->repository->sortable()->orderBy('id', 'desc')->paginate();
+
+        return view('admin.pages.plans.index',compact('plans','filters'));
     }
 
     public function create(){
@@ -56,5 +56,13 @@ class PlanController extends Controller
         $plan->delete();
 
         return redirect()->route('plans.index');
+    }
+
+    public function search(Request $request){
+
+        $filters = $request->except('_token');
+        $plans = $this->repository->search($request->filter);
+
+        return view('admin.pages.plans.index',compact('plans','filters'));
     }
 }
