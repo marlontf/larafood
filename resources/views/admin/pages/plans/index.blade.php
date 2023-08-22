@@ -10,10 +10,17 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('plans.search') }}" method="POST" class="form form-inline">
+            <form name="filtrar" action="{{ route('plans.search') }}" method="POST" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Nome" class="form-control">
-                <button type="submit" class="btn btn-dark ml-2"><i class="fas fa-filter"></i></button>
+                <div class="input-group mb-3">
+                    <input type="text" name="filter" placeholder="Insira uma pesquisa"class="form-control"
+                        value="{{ $filters['filter'] ?? '' }}">
+                    <div class="input-group-append" role='button' onclick="resetFilter()">
+                        <span class="input-group-text"><i class="fas fa-times"></i></span>
+                    </div>
+                    <button type="submit" class="btn btn-dark ml-2"><i class="fas fa-filter"></i></button>
+                </div>
+
             </form>
         </div>
         <div class="card-body">
@@ -77,3 +84,12 @@
 
     </div>
 @stop
+
+@section('js')
+    <script>
+        function resetFilter() {
+            document.querySelector('input[name=\'filter\']').value = ''
+            window.location.href = "{{ route('plans.index') }}"
+        }
+    </script>
+@endsection
