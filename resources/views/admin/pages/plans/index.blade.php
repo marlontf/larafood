@@ -46,7 +46,7 @@
                                 <i class="fas fa-sort-up"></i>
                             @endif
                         </th>
-                        <th width="100">Ações</th>
+                        <th width="130">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +61,7 @@
                             <td>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-warning"
                                     aria-label="Ver"><i class="far fa-eye"></i></a>
+                                <a href="{{route('plans.edit',$plan->url)}}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
                                 <form action="{{ route('plans.destroy', $plan->url) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
