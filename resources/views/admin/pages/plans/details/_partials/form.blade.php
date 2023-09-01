@@ -2,8 +2,8 @@
 
 <div class="form-group">
     <label>Nome:</label>
-    <input type="text" name="name" placeholder="Nome" class="form-control">
+    <input type="text" name="name" placeholder="Nome" class="form-control" value="{{$detail->name ?? old('name')}}">
 </div>
 <div class="form-group">
-    <button type="submit" class="btn btn-success">Adicionar</button>
+    <button type="submit" class="btn btn-success">Salvar</button>
 </div>

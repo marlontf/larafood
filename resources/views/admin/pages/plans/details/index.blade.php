@@ -33,7 +33,7 @@
                             <td>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-warning"
                                     aria-label="Ver"><i class="far fa-eye"></i></a>
-                                <a href="{{route('plans.edit',$plan->url)}}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                                <a href="{{route('details.plan.edit',[$plan->url, $detail->id])}}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
                                 <form action="{{ route('plans.destroy', $plan->url) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
