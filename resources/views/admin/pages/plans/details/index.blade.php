@@ -21,9 +21,6 @@
                         <th>
                             Nome
                         </th>
-                        <th>
-                           Ações
-                        </th>
                         <th width="130">Ações</th>
                     </tr>
                 </thead>
@@ -32,9 +29,6 @@
                         <tr>
                             <td>
                                 {{ $detail->name }}
-                            </td>
-                            <td>
-                                R$ {{ number_format($plan->price, 2, ',', '.') }}
                             </td>
                             <td>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-warning"
