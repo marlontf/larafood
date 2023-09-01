@@ -5,7 +5,7 @@
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}">Planos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}" class="active">Planos</a></li>
     </ol>
     <h1>Planos <a href="{{ route('plans.create') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h1>
 @stop
@@ -46,7 +46,7 @@
                                 <i class="fas fa-sort-up"></i>
                             @endif
                         </th>
-                        <th width="130">Ações</th>
+                        <th width="180">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,9 +59,12 @@
                                 R$ {{ number_format($plan->price, 2, ',', '.') }}
                             </td>
                             <td>
+                                <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-sm btn-primary"
+                                    aria-label="Detalhes"><i class="fas fa-info-circle"></i></a>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-warning"
                                     aria-label="Ver"><i class="far fa-eye"></i></a>
-                                <a href="{{route('plans.edit',$plan->url)}}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-sm btn-info"><i
+                                        class="fas fa-edit" aria-label="Editar"></i></a>
                                 <form action="{{ route('plans.destroy', $plan->url) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
