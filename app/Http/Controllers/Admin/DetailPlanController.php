@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPlan;
 use App\Models\Plan;
+use Illuminate\Http\Request;
 
 class DetailPlanController extends Controller
 {
@@ -28,5 +29,31 @@ class DetailPlanController extends Controller
             'plan' => $plan,
             'details' => $details
         ]);
+    }
+
+    public function create($urlPlan){
+        if(!$plan = $this->plan->where('url',$urlPlan)->first()){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.details.create',compact('plan'));
+    }
+
+    public function store(Request $request, $urlPlan){
+        if(!$plan = $this->plan->where('url',$urlPlan)->first()){
+            return redirect()->back();
+        }
+
+        /**
+         * Método funcional, mas foi utilizado outro método
+         * diretamente do relacionamento
+         */
+        // $data = $request->all();
+        // $data['plan_id'] = $plan->id();
+        // $this->repository->create($data);
+
+        $plan->details()->create($request->all());
+
+        return redirect()->route('details.plan.index', $plan->url);
     }
 }
